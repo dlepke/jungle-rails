@@ -10,6 +10,16 @@
 
   <%= render 'layouts/top_nav' %>
 
+  <% if current_user %>
+    <div class="greeting">
+      <span>Hello, <%= current_user[:first_name] %>!</span><%= link_to ' Logout', '/logout' %>
+    </div>
+  <% else %>
+    <div class="greeting">
+      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+    </div>
+  <% end %>
+
   <main class="container">
     <%= yield %>
   </main>

@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
-      redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
@@ -52,6 +51,19 @@ class OrdersController < ApplicationController
         )
       end
     end
+
+    respond_to do |format|
+      if order.save
+        UserMailer.order_email(order.email, order).deliver_later
+
+        format.html { redirect_to(order, notice: 'Your order has been placed.') }
+        format.json { render json: order, status: :created, location: order }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: order.errors, status: :unprocessable_entity }
+      end
+    end
+
     order.save!
     order
   end

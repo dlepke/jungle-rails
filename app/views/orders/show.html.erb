@@ -20,8 +20,6 @@
       <tbody>
         <% @order_total = 0 %>
         <% @order.line_items.each do |line_item| %>
-        <tr>
-        </tr>
           <%= render 'item', product_id: line_item.product_id, quantity: line_item.quantity %>
         <% end %>
       </tbody>

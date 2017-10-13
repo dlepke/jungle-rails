@@ -4,6 +4,10 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if @empty = true %>
+    <%= render 'empty_cart' %>
+
+  <% else %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -49,5 +53,6 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
 </section>

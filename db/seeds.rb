@@ -129,8 +129,83 @@ cat3.products.create!({
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture3.jpg'),
   quantity: 0,
-  price: 2_483.75
+  price: 2_483.75,
 })
+
+Review.create({
+  user_id: 1,
+  product_id: 1,
+  rating: 5,
+  description: "I'm reviewing a shirt!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 1,
+  rating: 5,
+  description: "Hey look, a review!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 2,
+  rating: 4,
+  description: "Hey look, some pants!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 3,
+  rating: 3,
+  description: "Hey look, a hat!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 4,
+  rating: 1,
+  description: "These socks suuuuuck!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 5,
+  rating: 5,
+  description: "Super cool shoes!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 6,
+  rating: 1,
+  description: "These make me feel like a sasquatch."
+})
+Review.create({
+  user_id: 1,
+  product_id: 7,
+  rating: 5,
+  description: "They're like a segeue for my feet"
+})
+Review.create({
+  user_id: 1,
+  product_id: 8,
+  rating: 5,
+  description: "Never cut hot dogs by hand again!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 9,
+  rating: 1,
+  description: "This thing is huge!"
+})
+Review.create({
+  user_id: 1,
+  product_id: 10,
+  rating: 5,
+  description: "Worst. Sleep. Ever."
+})
+Review.create({
+  user_id: 1,
+  product_id: 11,
+  rating: 4,
+  description: "Engineer nerds will love this."
+})
+
+
 
 
 puts "DONE!"

@@ -3,6 +3,10 @@
     <%= link_to product do %>
       <%= image_tag product.image.thumb, alt: product.name %>
       <h4><%= product.name %></h4>
+      <p>
+        <% @product = product %>
+        <%= render 'product_rating' %>
+      </p>
     <% end %>
   </header>
   <p class="description">

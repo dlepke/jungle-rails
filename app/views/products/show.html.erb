@@ -22,10 +22,26 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt>Rating</dt>
+          <dd><%= render 'product_rating' %></dd>
         </dl>
       </div>
     </div>
 
   </article>
+
+  <div>
+  Reviews:<br>
+  <% @reviews = Review.all %>
+  <% @reviews.each do |review| %>
+    <% if review.product_id == @product.id %>
+      <p>
+      User ID: <%= review.user_id %><br>
+      Rating: <%= review.rating %><br>
+      Description: <%= review.description %>
+      </p>
+    <% end %>
+  <% end %>
+  </div>
 
 </section>

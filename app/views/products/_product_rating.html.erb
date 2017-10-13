@@ -1,0 +1,20 @@
+<% @reviews = Review.all %>
+    <% @ratings_total = 0 %>
+    <% @number_of_ratings = 0 %>
+    <% @reviews.each do |review| %>
+        <% if review.product_id == @product.id %>
+          <% @ratings_total += review.rating %>
+          <% @number_of_ratings += 1 %>
+        <% end %>
+    <% end %>
+
+<% if @number_of_ratings != 0 %>
+    <% @product_rating = @ratings_total / @number_of_ratings %>
+    <% if @product_rating == 1 %>
+        <%= @product_rating %> star
+    <% else %>
+        <%= @product_rating %> stars
+    <% end %>
+<% else %>
+    No ratings 
+<% end %>

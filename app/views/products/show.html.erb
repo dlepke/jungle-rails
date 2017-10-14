@@ -23,7 +23,7 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
           <dt>Rating</dt>
-          <dd><%= render 'product_rating' %></dd>
+          <dd><%= render 'products/product_rating' %></dd>
         </dl>
       </div>
     </div>
@@ -31,17 +31,52 @@
   </article>
 
   <div>
-  Reviews:<br>
-  <% @reviews = Review.all %>
-  <% @reviews.each do |review| %>
-    <% if review.product_id == @product.id %>
-      <p>
-      User ID: <%= review.user_id %><br>
-      Rating: <%= review.rating %><br>
-      Description: <%= review.description %>
-      </p>
+  <h2>Reviews:</h2><br>
+  
+  <% if current_user %>
+    <%= form_for [@product, @review] do |f| %>
+      <div class="form-group">
+        <%= f.label :rating %>
+        <%= f.select(:rating, options_for_select(1..5))%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %> 
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+
+      <div class="form-group actions">
+        <%= f.submit %>
+      </div>
     <% end %>
+
   <% end %>
-  </div>
+  
+
+  <% @reviews = Review.all %>
+
+  <% @reviews.reverse.each do |review| %>
+  <dl class="dl-horizontal">
+    <% if review.product_id == @product.id %>
+      <div>
+        <dt><h3><%= review.user.first_name %></h3></dt><dd></dd>
+        <dt>Rating: </dt><dd><%= review.rating %></dd>
+        <% if review.description != '' %>
+          <dt>Description:</dt> <dd><%= review.description %></dd>
+          <% if current_user %>
+            <% if current_user.id == review.user_id %>
+                <dt>Delete?</dt>
+                <dd><%= link_to "", [@product, review], 
+                :method => :delete, class: "fa fa-trash" %></dd>
+            <% end %>
+          <% end %>
+        <% end %>
+        <dt>Created at:</dt>
+        <dd><%= review.created_at.to_time %>
+      </div>
+      
+    <% end %>
+  </dl>
+  <% end %>
 
 </section>

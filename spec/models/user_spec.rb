@@ -84,6 +84,34 @@ RSpec.describe User, type: :model do
 
         expect(@user).to be_nil
       end
+
+      it 'should return instance of user even if leading or trailing whitespace entered' do
+        User.create({
+          first_name: 'Alex',
+          last_name: 'Jones',
+          email: 'alex@jones.com',
+          password: 'password',
+          password_confirmation: 'password'
+        })
+
+        @user = User.authenticate_with_credentials('alex@jones.com   ', 'password')
+
+        expect(@user).to have_attributes(email: "alex@jones.com")
+      end
+
+      it 'should return an instance of the user if good credentials' do
+        User.create({
+          first_name: 'Alex',
+          last_name: 'Jones',
+          email: 'alex@jones.com',
+          password: 'password',
+          password_confirmation: 'password'
+        })
+
+        @user = User.authenticate_with_credentials('ALEX@jones.com', 'password')
+
+        expect(@user).to have_attributes(email: "alex@jones.com")
+      end
     end
   end
 end

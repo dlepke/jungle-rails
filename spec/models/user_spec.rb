@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
         expect(@user).to have_attributes(email: "alex@jones.com")
       end
 
-      it 'should return an instance of the user if good credentials' do
+      it 'should return an instance of the user if good credentials but weird casing' do
         User.create({
           first_name: 'Alex',
           last_name: 'Jones',
